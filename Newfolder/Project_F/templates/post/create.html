@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<div class="container-fluid py-4">
+    {% if create_suc %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         {{ create_suc }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+<form method="POST" enctype="multipart/form-data">
+    <a href="{% url 'index' %}" class="btn btn-dark btn-outline-primary float-end">Index</a>
+    {% csrf_token %}
+    {{ post.as_p }}
+    
+  
+    <input type="submit" value="Post" class="btn btn-dark">
+</form>
+</div>
+{% endblock %}

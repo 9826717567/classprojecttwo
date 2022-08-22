@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<div class="container py-5">
+    <div class="card">
+        <div class="card-head">
+        <h2 class="py-3 bg-dark text-white text-center text-capitalize">{{ post.post_title }}</h2>
+        </div>
+        <div class="card-body text-center">
+            <h4 class="form-control">{{ post.post_description }}</h4>
+            <h4 class="form-control">{{ post.comment }}</h4>
+            <h4 class="form-control">{{ post.post_image }}</h4>
+            <h4 class="form-control">{{ post.post_status }}</h4>
+        </div>
+    </div>
+</div>
+{% endblock %}

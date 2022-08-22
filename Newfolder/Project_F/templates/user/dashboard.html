@@ -1,0 +1,67 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+ 
+    #picture{
+        background-image: url("{% static 'images/newsplash.jpg' %}"); width: 100%; height: 900px; background-position: center; background-size: cover;
+    }
+    .card{
+        margin: 250px auto;
+    }
+    .calculator-head{
+        color: rgb(26, 64, 97);
+    }
+    .form-group{
+        padding: 8px 0px;
+    }
+    #cac_img{
+        width: 100%; height: 100px; background-size: cover; background-repeat: no-repeat; background-image: url("{% static 'images/calculator.jpg' %}");
+    }
+    #cac_img2{
+        width: 100%; height: 100px; background-size: cover; background-repeat: no-repeat; background-image: url("{% static 'images/calculator.jpg' %}");
+    }
+    hr{
+        margin:5px auto;
+    }
+    .group{
+        display: flex; justify-content: center; margin: 200px 0px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4" id="picture">
+    <div class="container">
+        <div class="group">
+        <div class="card" style="width: 18rem">
+            <img id="cac_img" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title text-center">Tools <hr class="w-25"></h5>
+              <p class="card-text">Addition, Multiplication, Subtraction and Division is in your hand. Try Some of our Features.</p>
+              <a href="{% url 'calculator' %}" class="btn btn-primary offset-3">Calculator</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img class="card-img-top" id="cac_img2">
+            <div class="card-body">
+              <h5 class="card-title text-center">Post<hr class="w-25"></h5>
+              <p class="card-text">Share Pictures with friends to keep memories.</p>
+              <a href="{% url 'createpost' %}" class="btn btn-primary offset-3">Create Post</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img class="card-img-top" id="cac_img2">
+            <div class="card-body">
+              <h5 class="card-title text-center">Percentage<hr class="w-25"></h5>
+              <p class="card-text">Share Pictures with friends to keep memories.</p>
+              <a href="{% url 'percentage' %}" class="btn btn-primary offset-3">Percentage</a>
+            </div>
+          </div>
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

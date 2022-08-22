@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+{% block style %}
+<style>
+    .form-group{
+        margin: 8px 0px;
+    }
+    .card{
+        margin:100px auto;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container my-5">
+    <div class="card w-25">
+        <div class="card-head">
+            <h2 class="py-3 text-white bg-dark text-center">Caculator</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" placeholder="Enter First Number" name="fnum">
+                </div>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" placeholder="Enter Last Number" name="lnum">
+                </div>
+                <input type="submit" class="btn btn-dark btn-outline-primary" value="Action">
+                <select name="operator" id="operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                </select>
+                <p></p>
+                Total : <input type="text" value="{{total}}" class="text-danger">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

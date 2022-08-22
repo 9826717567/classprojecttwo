@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+{% block style %}
+<style>
+    .form-group{
+        margin: 3px 0px;
+    }
+    .card{
+        margin: 30px auto;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="card w-25">
+        <div class="card-head">
+            <h2 class="text-center py-3 bg-dark text-white">Percentage</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="num"></label>
+                    <input type="text" name="num" placeholder="Enter Total Number">
+                </div>
+                <div class="form-group">
+                    <label for="percent"></label>
+                    <input type="text" name="percent" placeholder="Enter Percentage">
+                </div>
+                <button type="submit" class="btn btn-dark">Done</button>
+                <div class="form-group">
+                    Total : <input type="text" value="{{ all |floatformat:2 }}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

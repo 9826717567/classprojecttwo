@@ -1,0 +1,53 @@
+{% extends 'layout/base.html' %}
+{% block style %}
+<style>
+    .card{
+        margin: 40px auto;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="card w-50">
+        <div class="card-head">
+            <h2 class="text-white py-3 text-center bg-dark">Login</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{% url 'login' %}" class="py-3">
+
+                {% if sess_unsuc %}
+                <div class="alert alert-success alert-dismissible fade show  mt-1" role="alert">
+                     {{sess_unsuc }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+
+                {% if log_unsuc %}
+                <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                     {{log_unsuc }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                {% if invalid %}
+                <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                     {{invalid}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                {% if logout_suc %}
+                <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                     {{logout_suc}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                
+                {% csrf_token %}
+                {{ login.as_p }}
+                <input type="submit" value="Login" class="btn btn-white btn-outline-danger">
+
+            </form>
+            Not registered Yet ?<a href="{% url 'registration' %}">click here</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

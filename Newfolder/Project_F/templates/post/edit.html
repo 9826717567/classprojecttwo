@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<div class="container py-5">
+    <div class="bg-light">
+        <div class="card-head py-3 text-center text-white bg-dark">
+            <h2>Edit Post</h2>
+        </div>
+        <div class="px-3 class-body py-3">
+            <form action="{% url 'update' post.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ post.id }}">
+                <div class="form-group">
+                    <label for="post_title" class="fw-bold">Title :</label>
+                    <input type="text" name="post_title" value="{{post.post_title}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post_description" class="fw-bold">Description :</label>
+                    <input type="text" name="post_description" value="{{ post.post_description }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="post_image" class="fw-bold">Image :</label>
+                    <p></p>
+                    <input type="file" name="post_image" value="{{ post.post_image }}">
+                </div>
+                <div class="form-group">
+                    <label for="post_status" class="fw-bold">Status :</label>
+                    <input type="text" name="post_status" value="{{post.post_status}}" class="form-control">
+                </div>
+                <input type="submit" value="Update" class="btn btn-dark btn-outline-primary mt-2">
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

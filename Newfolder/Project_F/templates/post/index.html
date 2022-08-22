@@ -1,0 +1,44 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="d-flex py-3" action="search" method="GET">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+            <button class="btn btn-outline-success me-4" type="submit">Search</button>
+              </form>
+        <table class="table table-hover">
+            <div class="table-head">
+                <tr class="bg-light" id="table-headid">
+                    <th class="py-3">S.No</th>
+                    <th class="py-3">Title</th>
+                    <th class="py-3">Description</th>
+                    <th class="py-3">Image</th>
+                    <th class="py-3">Status</th>
+                    <th class="py-3">Date & Time</th>
+                    <th class="py-3">Action</th>
+                </tr>
+            </div>
+            <div class="table-body">
+                {% for p in post %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p.post_title }}</td>
+                    <td>{{ p.post_description }}</td>
+                    <td>
+                        <img src="/media/{{ p.post_image }}" width="150" height="100" alt="">
+                    </td>
+                    <td>{{ p.post_status }}</td>
+                    <td>{{ p.created_at }}</td>     
+                    <td>
+                        <a href="{% url 'editpost' p.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'delete' p.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'showpost' p.id %}" class="btn btn-secondary btn-sm">Show</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </div>
+        </table>
+    </div>
+</div>
+{% endblock %}

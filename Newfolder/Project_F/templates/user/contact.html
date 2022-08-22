@@ -1,0 +1,98 @@
+{% extends 'layout/base.html' %}
+{% block body %}
+<div class="container-fluid">
+  <div class="main_forms py-3">
+    <div class="forms-head"><h2 class="text-white py-4 bg-dark text-center">Contact</h2></div>
+<form class="row g-3 needs-validation py-4 " method="POST" novalidate>
+  {% if contact_unsuc %}
+  <div class="alert alert-success alert-dismissible fade show  mt-1" role="alert">
+       {{ contact_unsuc }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% if contact_suc %}
+  <div class="alert alert-success alert-dismissible fade show  mt-1" role="alert">
+       {{ contact_suc }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+  {% csrf_token %}
+    <div class="col-md-4">
+      <label for="fname" class="form-label">First name</label>
+      <input type="text" class="form-control" id="validationCustom01" name="fname" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="lname" class="form-label">Last name</label>
+      <input type="text" class="form-control" id="validationCustom02" name="lname" required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">Email Address</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">@</span>
+        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="gmail" required>
+        <div class="invalid-feedback">
+          Please Enter Username.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="city" class="form-label">City</label>
+      <input type="text" class="form-control" id="validationCustom03" name="city" required>
+      <div class="invalid-feedback">
+        Please provide a valid city.
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label for="validationCustom04" class="form-label">State</label>
+      <select class="form-select" id="validationCustom04" required>
+        <option selected disabled value="">Select</option>
+        <option>Mechi</option>
+        <option>Koshi</option>
+        <option>Sagarmatha</option>
+        <option>janakpur</option>
+        <option>Bagmati</option>
+        <option>Rapti</option>
+        <option>Veri</option>
+        <option>Gandaki</option>
+        <option>Lumbini</option>
+        <option>Seti</option>
+        <option>Dhaulagiri</option>
+        <option>Narayani</option>
+        <option>Karnali</option>
+        <option>Mahakali</option>
+      </select>
+      <div class="invalid-feedback">
+        Please select a valid state.
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label for="phone" class="form-label">Contact</label>
+      <input type="text" class="form-control" id="validationCustom05" name="phone" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+          Agree to terms and conditions
+        </label>
+        <div class="invalid-feedback">
+          You must agree before submitting.
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-dark" type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+</div>
+{% endblock %}
