@@ -1,3 +1,4 @@
+from email import message
 import os
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -8,6 +9,8 @@ from App_F.forms import Post_Form
 from App_F.models import Information
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
+
 
 def home(request):
     return HttpResponse('Welcome Home')
@@ -26,40 +29,37 @@ def user_Registration(request):
         users.contact = request.POST.get('contact')
         users.city = request.POST.get('city')
         users.save()
-        context.setdefault('reg_suc', 'Succesfully registered')
-        return render(request, template, context)
+        messages.success(request, 'Succesfully registered')
+        return redirect('/login')
     else:
         return render(request, template,context)
 
 
 def user_Login(request):
+    template = 'user/login.html'
     form = User_Login
+    context = {'login': form}
     if request.method == "POST":
         try:
-            users = User.objects.get(email=request.POST.get('email'))
-            if request.POST.get('password') == users.password:
-                request.session['session_email'] = users.email
+            user = User.objects.get(email=request.POST.get('email'))
+            if request.POST.get('password') == user.password:
+                request.session['session_email'] = user.email
 
                 if request.session.has_key('session_email'):
-                    template = 'user/dashboard.html'
-                    context = {'login': form}
-                    return render(request, template, context)
+                    return redirect('/index')
                 else:
-                    template = 'user/login.html'
-                    context = {'login': form, 'sess_unsuc': 'Access Forbidden'}
-                    return render(request, template, context)
+                    messages.success(request, 'Access Denied')
+                    return redirect('/login', context)
             else:
-                template = 'user/login.html'
-                context = {'login': form, 'log_unsuc': 'Email or Password does not match'}
-                return render(request, template, context)
+                messages.success(request, 'Email or Password does not match')
+                return redirect('/login', context)
         except:
-            template = 'user/login.html'
-            context = {'login': form, 'invalid': 'Account does not Exist'}
-            return render(request, template, context)
+            messages.error(request, 'Account does not exits')
+            return redirect('/login')
     else:
-        template = 'user/login.html'
-        context = {'login': form}
         return render(request, template, context)
+
+
 
 def contact(request):
     if request.session.has_key('session_email'):
@@ -163,19 +163,23 @@ def edit_Post(request, post_id):
         return render(request, template, context)
 
 
-def update_Post(request, post_id):
+def post_Update(request, id):
     template = 'post/edit.html'
-    post = Post.objects.get(id=post_id)
+    post = Post.objects.get(id=id)
     if request.method == "POST":
-        if len(post.post_image) > 0:
-            os.remove(post.post_image.path)
+        if len(request.FILES) != 0:
+            if len(post.post_image) > 0:
+                os.remove(post.post_image)
+            post.post_image = request.FILES['post_image']
         post.post_title = request.POST.get('post_title')
         post.post_description = request.POST.get('post_description')
         post.post_status = request.POST.get('post_status')
         post.save()
+        messages.success(request, 'Succesfully updated')
         return redirect('/index')
     else:
         return render(request, template)
+
 
     
     

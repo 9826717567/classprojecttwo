@@ -2,9 +2,10 @@ from django.contrib import admin
 
 from App_F.models import User, Post
 
-class DjangoAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(User)
-admin.site.register(Post)
+class userAdmin(admin.ModelAdmin):
+    admin.site.register(User)
+
+class postAdmin(admin.ModelAdmin):
+    admin.site.register(Post)
 
 
